@@ -11,4 +11,3 @@ RUN chown dotnet /app
 
 USER dotnet
 CMD ["dumb-init", "/bin/start.sh"]
-
