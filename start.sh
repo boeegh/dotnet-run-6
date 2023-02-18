@@ -14,7 +14,6 @@ fi
 
 # todo: support for enforcing ownership of non-root user?
 # 
-# 
 
 # no dll found?
 if [ ! $appDll ] || [ ! -f $appDll ]
