@@ -23,12 +23,13 @@ git push
 # assumes that downstream repos already has upstream remote
 # git remote add upstream git@github.com:boeegh/dotnet-run-base.git
 base_dir=$PWD
-for path in "../dotnet-run-6" "../dotnet-run-7"
+# for path in "../dotnet-run-6" "../dotnet-run-7"
+for path in "../dotnet-run-6"
 do
   cd $path
   git fetch upstream
-  # git rebase upstream/main || (echo "Entering manual mode. When you're ready to commit, type: exit" && bash)
-  git merge upstream/main || (echo "Entering manual mode in $PWD. When you're ready to commit, type: exit" && bash && echo "Returned from manual mode. Proceeding with commit and push.")
+  git rebase upstream/main || (echo "Entering manual mode. When you're ready to commit, type: exit" && bash && echo "Returned from manual mode. Proceeding with commit and push.")
+  # git merge upstream/main || (echo "Entering manual mode in $PWD. When you're ready to commit, type: exit" && bash && echo "Returned from manual mode. Proceeding with commit and push.")
 
   # git add -A || echo "Nothing to add in $PWD?"
   git commit -m $commit_message || echo "Nothing to commit in $PWD?"
@@ -36,8 +37,8 @@ do
     git tag "v0.$minor_version.$commit_version" || echo "Unable to add tag."
     git push --tags || echo "Unable to push tags."
   fi
-  git push
-#  git push --force
+#  git push
+  git push --force
 
   cd $base_dir
 done
